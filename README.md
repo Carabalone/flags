@@ -1,50 +1,15 @@
-# React + TypeScript + Vite
+# Flags
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I want to play a game to guess flags. Current games have at least one of these problems:
+- They don't have support for the full 254 countries + sorveign states.
+- They don't have autocomplete.
+- They are multiple choice.
+- They aren't made by me.
 
-Currently, two official plugins are available:
+As of 01/09/24 I have a semi-functional game, but the code is not pretty since this is a prototype largely coded with AI tools as I just want to play a game.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I have several plans to this game, such as to:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Add a daily run of x (5-10) countries.
+- Some kind of invite to competition, like guessing countries until the other part loses.
+- Multiple choice option (I dislike it but I know some people like it).
