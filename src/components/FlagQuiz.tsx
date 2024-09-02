@@ -8,7 +8,8 @@ interface FlagQuizProps {
 
 const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
   const [answer, setAnswer] = useState('');
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
+  const [message, setMessage] = useState<JSX.Element | null>(null); // Changed to JSX.Element or null
   const [currentFlag, setCurrentFlag] = useState<{ code: string; name: string } | null>(null);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
@@ -24,7 +25,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
   const randomizeCountry = () => {
     const randomCountry = countriesData[Math.floor(Math.random() * countriesData.length)];
     setCurrentFlag(randomCountry);
-    setMessage('');
+    setMessage(null);
     setAnswer('');
     setSuggestions([]);
     setActiveSuggestionIndex(0);
@@ -33,14 +34,18 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (answer == "") {
-        setMessage("Input Something");
+      setMessage(<p className="text-red-500">Input Something</p>);
         return;
     }
     if (currentFlag && answer.toLowerCase() === currentFlag.name.toLowerCase()) {
       setScore(score + 1);
-      setMessage('Correct!');
+      setMessage(<p className="text-green-500">Correct!</p>);
     } else {
-      setMessage(`Incorrect! The correct answer was ${currentFlag?.name}.`);
+      setMessage(
+        <p className="text-red-500">
+          Incorrect! The correct answer was <span className="font-semibold text-lime-500">{currentFlag?.name}.</span>
+        </p>
+      );
     }
 
     // setMessage(`your answ: ${answer}`)
@@ -60,9 +65,22 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
     setAnswer(value);
 
     if (value.length > 0) {
-      const filteredSuggestions = countriesData
-        .filter(country => country.name.toLowerCase().startsWith(value.toLowerCase()))
-        .map(country => country.name);
+
+    const filteredSuggestions = countriesData
+      .filter(country => 
+        country.name.toLowerCase().includes(value) || 
+        country.name.toLowerCase().startsWith(value)
+      )
+      .sort((a, b) => {
+        // Prioritize startsWith matches
+        const aStartsWith = a.name.toLowerCase().startsWith(value);
+        const bStartsWith = b.name.toLowerCase().startsWith(value);
+
+        if (aStartsWith && !bStartsWith) return -1;
+        if (!aStartsWith && bStartsWith) return 1;
+        return 0;
+      })
+      .map(country => country.name);
       setSuggestions(filteredSuggestions);
       setActiveSuggestionIndex(0);
     } else {
@@ -168,10 +186,11 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
           </button>
         </form>
         {message && (
-          <p className={`mt-4 text-lg font-semibold ${message.startsWith('Correct!') ? 'text-green-500' : 'text-red-500'}`}>
+          <p className={`mt-4 text-lg font-semibold`}>
             {message}
           </p>
         )}
+
         <button
           onClick={handleFinishEarly}
           className="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300"
@@ -183,9 +202,9 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
       {/* Popup for end of game */}
       {isFinished && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-20">
-          <div className="bg-white text-slate-800 p-6 rounded-lg shadow-lg text-center">
+          <div className="bg-white text-slate-800 p-6 space-x-4 rounded-lg shadow-lg text-center">
             <h2 className="text-2xl font-bold mb-4 text-black">Game Over</h2>
-            <p className="mb-4">Your final score is <span className="font-bold">{score}/{n}</span>.</p>
+            <p className="mb-4">Your final score is <span className="font-bold text-slate-700">{score}/{n}</span>.</p>
             <button
               onClick={handleRetry}
               className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 mb-4"
