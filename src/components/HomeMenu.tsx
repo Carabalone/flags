@@ -33,4 +33,3 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onSelectMode }) => {
 };
 
 export default HomeMenu;
-

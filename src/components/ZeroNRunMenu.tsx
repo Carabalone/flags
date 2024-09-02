@@ -25,7 +25,9 @@ const ZeroNRunMenu: React.FC<ZeroNRunMenuProps> = ({ onStart }) => {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full bg-gray-100">
       <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-lg font-semibold text-slate-800 mb-4">Select Number of Flags (N): {n}</h2>
+        <h2 className="text-lg font-semibold text-slate-800 mb-4">
+          Select Number of Flags (N): {n}
+        </h2>
         <input
           type="range"
           min="1"
@@ -55,4 +57,3 @@ const ZeroNRunMenu: React.FC<ZeroNRunMenuProps> = ({ onStart }) => {
 };
 
 export default ZeroNRunMenu;
-

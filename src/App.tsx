@@ -4,7 +4,9 @@ import ZeroNRunMenu from './components/ZeroNRunMenu';
 import FlagQuiz from './components/FlagQuiz';
 
 const App: React.FC = () => {
-  const [gameMode, setGameMode] = useState<'home' | '0-n-menu' | 'quiz'>('home');
+  const [gameMode, setGameMode] = useState<'home' | '0-n-menu' | 'quiz'>(
+    'home'
+  );
   const [n, setN] = useState(10);
 
   const handleSelectMode = (mode: '0-n' | 'full') => {
