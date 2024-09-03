@@ -162,7 +162,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
     <div className="flex flex-col items-center justify-center h-full w-full bg-gray-100 overflow-hidden">
       <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg relative">
         <div className="flex justify-between w-full mb-4 text-black">
-          <span className="text-lg font-bold">Score: {score}</span>
+          <span className="text-lg font-bold">Score: {score}/{n}</span>
           <span className="text-lg font-bold">Remaining: {remainingCountries.length}</span>
         </div>
         {currentFlag && (
