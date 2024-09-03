@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import HomeMenu from './components/HomeMenu';
 import ZeroNRunMenu from './components/ZeroNRunMenu';
+import ZeroNRunMenuAlt from './components/ZeroNRunMenuAlt';
 import FlagQuiz from './components/FlagQuiz';
 
 const App: React.FC = () => {
@@ -30,7 +31,7 @@ const App: React.FC = () => {
   return (
     <div className="w-screen h-screen overflow-hidden">
       {gameMode === 'home' && <HomeMenu onSelectMode={handleSelectMode} />}
-      {gameMode === '0-n-menu' && <ZeroNRunMenu onStart={startGame} />}
+      {gameMode === '0-n-menu' && <ZeroNRunMenuAlt onStart={startGame} />}
       {gameMode === 'quiz' && <FlagQuiz n={n} onFinish={finishGame} />}
     </div>
   );
