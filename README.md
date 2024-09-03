@@ -14,3 +14,6 @@ I have several plans to this game, such as to:
 - Some kind of invite to competition, like guessing countries until the other part loses.
 - Multiple choice option (I dislike it but I know some people like it).
 - Category specific (only europe, only america, only europe & america, etc.).
+
+### TODO
+- back button

@@ -149,7 +149,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
 
   const handleRetry = () => {
     setScore(0);
-    setRemainingCountries(shuffleArray(countriesData.slice(0, n))); // Reset with a new shuffled array
+    setRemainingCountries(shuffleArray(countriesData).slice(0, n)); // Reset with a new shuffled array
     setIsFinished(false);
     randomizeCountry();
   };
@@ -172,7 +172,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
               https://flagcdn.com/h240/${currentFlag.code.toLowerCase()}.png 3x`}
             height="80"
             alt={currentFlag.name}
-            className="mb-6"
+            className="mb-6 shadow-lg"
           />
         )}
         <form onSubmit={handleSubmit} className="w-full relative">
