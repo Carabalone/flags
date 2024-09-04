@@ -6,8 +6,6 @@ I want to play a game to guess flags. Current games have at least one of these p
 - They are multiple choice.
 - They aren't made by me.
 
-As of 01/09/24 I have a semi-functional game, but the code is not pretty since this is a prototype largely coded with AI tools as I just want to play a game.
-
 I have several plans to this game, such as to:
 
 - Add a daily run of x (5-10) countries.
