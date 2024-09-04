@@ -6,7 +6,6 @@ interface FlagQuizProps {
   onFinish: (score: number) => void;
 }
 
-
 const shuffleArray = (array: any[]) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -35,6 +34,11 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
     randomizeCountry();
   }, []);
 
+  useEffect(() => {
+    randomizeCountry();
+  }, [remainingCountries])
+  
+
   const randomizeCountry = () => {
     if (remainingCountries.length === 0) {
       setIsFinished(true);
@@ -43,7 +47,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
 
     const nextCountry = remainingCountries[0];
     setCurrentFlag(nextCountry);
-    setRemainingCountries(remainingCountries.slice(1)); // Remove the used country
+    // setRemainingCountries(remainingCountries.slice(1)); // Remove the used country
     setMessage(null);
     setAnswer('');
     setSuggestions([]);
@@ -70,7 +74,8 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
 
     setTimeout(() => {
       if (remainingCountries.length > 0) {
-        randomizeCountry();
+        // randomizeCountry();
+        setRemainingCountries(remainingCountries.slice(1)); // Reset with a new shuffled array
       } else {
         setIsFinished(true);
       }
@@ -151,7 +156,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
     setScore(0);
     setRemainingCountries(shuffleArray(countriesData).slice(0, n)); // Reset with a new shuffled array
     setIsFinished(false);
-    randomizeCountry();
+    // randomizeCountry();
   };
 
   const handleBackToMenu = () => {
