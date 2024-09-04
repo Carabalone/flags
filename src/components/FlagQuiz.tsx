@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import countriesData from '../assets/countries_corrected.json';
 
 interface FlagQuizProps {
@@ -29,6 +29,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
   const [score, setScore] = useState(0);
   const [remainingCountries, setRemainingCountries] = useState(() => shuffleArray(countriesData).slice(0,n));
   const [isFinished, setIsFinished] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     randomizeCountry();
@@ -52,6 +53,9 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
     setAnswer('');
     setSuggestions([]);
     setActiveSuggestionIndex(0);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const handleSubmit = (e?: React.FormEvent) => {
@@ -187,6 +191,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
             value={answer}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
+            ref={inputRef}
             className="w-full px-4 py-2 mb-4 text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
             autoComplete="off"
           />
