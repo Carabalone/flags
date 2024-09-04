@@ -9,18 +9,25 @@ const App: React.FC = () => {
     'home'
   );
   const [n, setN] = useState(10);
+  const [quizMode, setQuizMode] = useState<'normal' | 'hardcore'>('normal');
 
-  const handleSelectMode = (mode: '0-n' | 'full') => {
+  const handleSelectMode = (mode: '0-n' | 'full' | 'hardcore') => {
     if (mode === '0-n') {
       setGameMode('0-n-menu');
     } else if (mode === 'full') {
       setN(254);
+      setQuizMode('normal');
+      setGameMode('quiz');
+    } else if (mode === 'hardcore') {
+      setN(254);
+      setQuizMode('hardcore');
       setGameMode('quiz');
     }
   };
 
   const startGame = (selectedN: number) => {
     setN(selectedN);
+    setQuizMode('normal');
     setGameMode('quiz');
   };
 
@@ -32,7 +39,7 @@ const App: React.FC = () => {
     <div className="w-screen h-screen overflow-hidden">
       {gameMode === 'home' && <HomeMenu onSelectMode={handleSelectMode} />}
       {gameMode === '0-n-menu' && <ZeroNRunMenuAlt onStart={startGame} />}
-      {gameMode === 'quiz' && <FlagQuiz n={n} onFinish={finishGame} />}
+      {gameMode === 'quiz' && <FlagQuiz n={n} onFinish={finishGame} mode={quizMode} />}
     </div>
   );
 };

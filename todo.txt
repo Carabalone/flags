@@ -1,0 +1,10 @@
+- TODO {
+  Back button,
+  Lives / Hardcore mode,
+  Dark Mode,
+}
+
+Plan TODO v1 {
+  Back Button, 
+  Hardcore Mode,
+}

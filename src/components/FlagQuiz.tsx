@@ -3,6 +3,7 @@ import countriesData from '../assets/countries_corrected.json';
 
 interface FlagQuizProps {
   n: number;
+  mode: 'normal' | 'hardcore';
   onFinish: (score: number) => void;
 }
 
@@ -17,7 +18,7 @@ const shuffleArray = (array: any[]) => {
 const normalizeString = (str: string) => 
   str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
+const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
   const [answer, setAnswer] = useState('');
   const [message, setMessage] = useState<JSX.Element | null>(null); 
   const [currentFlag, setCurrentFlag] = useState<{
@@ -27,7 +28,9 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [remainingCountries, setRemainingCountries] = useState(() => shuffleArray(countriesData).slice(0,n));
+  const [remainingCountries, setRemainingCountries] = useState(() =>
+    shuffleArray(countriesData).slice(0, mode === 'normal' ? n : countriesData.length)
+  );
   const [isFinished, setIsFinished] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -74,11 +77,16 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
           <span className="font-semibold text-lime-500">{currentFlag?.name}.</span>
         </p>
       );
+      if (mode === 'hardcore') {
+        setTimeout(() => {
+          setIsFinished(true);
+        }, 500);
+        return;
+      }
     }
 
     setTimeout(() => {
       if (remainingCountries.length > 0) {
-        // randomizeCountry();
         setRemainingCountries(remainingCountries.slice(1)); // Reset with a new shuffled array
       } else {
         setIsFinished(true);
@@ -237,7 +245,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, onFinish }) => {
             <p className="mb-4">
               Your final score is{' '}
               <span className="font-bold text-slate-700">
-                {score}/{n}
+                {score}{mode === 'normal' ? `/${n}` : ''}
               </span>
               .
             </p>
