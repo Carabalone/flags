@@ -38,7 +38,10 @@ const App: React.FC = () => {
     <div className="w-screen h-screen overflow-hidden">
       {gameMode === 'home' && <HomeMenu onSelectMode={handleSelectMode} />}
       {gameMode === '0-n-menu' && (
-        <ZeroNRunMenuAlt onStart={startGame} onHome={() => setGameMode('home')} />
+        <ZeroNRunMenuAlt
+          onStart={startGame}
+          onHome={() => setGameMode('home')}
+        />
       )}
       {gameMode === 'quiz' && (
         <FlagQuiz n={n} onFinish={finishGame} mode={quizMode} />

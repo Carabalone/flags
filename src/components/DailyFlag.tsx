@@ -12,7 +12,10 @@ const getCurrentDay = () => {
 };
 
 const DailyFlag: React.FC = () => {
-  const [dailyFlag, setDailyFlag] = useState<{ name: string; code: string } | null>(null);
+  const [dailyFlag, setDailyFlag] = useState<{
+    name: string;
+    code: string;
+  } | null>(null);
 
   useEffect(() => {
     const savedFlag = localStorage.getItem('dailyFlag');
@@ -43,4 +46,3 @@ const DailyFlag: React.FC = () => {
 };
 
 export default DailyFlag;
-

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Title from './Title.tsx'
+import Title from './Title.tsx';
 
 interface ZeroNRunMenuAltProps {
   onStart: (n: number) => void;
@@ -10,7 +10,8 @@ const ZeroNRunMenu: React.FC<ZeroNRunMenuAltProps> = ({ onStart, onHome }) => {
   const [n, setN] = useState(10);
   const [customValue, setCustomValue] = useState('');
 
-  const buttonClass = "bg-blue-500 font-semibold text-white py-2 px-2 rounded-lg hover:bg-blue-600 transition duration-300 w-24 items-center";
+  const buttonClass =
+    'bg-blue-500 font-semibold text-white py-2 px-2 rounded-lg hover:bg-blue-600 transition duration-300 w-24 items-center';
 
   const handleButtonClick = (value: number) => {
     setN(value);
@@ -33,49 +34,32 @@ const ZeroNRunMenu: React.FC<ZeroNRunMenuAltProps> = ({ onStart, onHome }) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-full bg-gray-100">
-      <div> <Title/> </div>
+      <div>
+        {' '}
+        <Title />{' '}
+      </div>
       <div className="flex flex-col">
         <div className="grid grid-cols-3 gap-4 bg-white p-6 rounded-lg shadow-lg place-items-center">
           {/* Row 1 */}
-          <button
-            onClick={() => handleButtonClick(10)}
-            className={buttonClass}
-          >
+          <button onClick={() => handleButtonClick(10)} className={buttonClass}>
             10
           </button>
-          <button
-            onClick={() => handleButtonClick(15)}
-            className={buttonClass}
-          >
+          <button onClick={() => handleButtonClick(15)} className={buttonClass}>
             15
           </button>
-          <button
-            onClick={() => handleButtonClick(20)}
-            className={buttonClass}
-          >
+          <button onClick={() => handleButtonClick(20)} className={buttonClass}>
             20
           </button>
-
           {/* Row 2 */}
-          <button
-            onClick={() => handleButtonClick(25)}
-            className={buttonClass}
-          >
+          <button onClick={() => handleButtonClick(25)} className={buttonClass}>
             25
           </button>
-          <button
-            onClick={() => handleButtonClick(30)}
-            className={buttonClass}
-          >
+          <button onClick={() => handleButtonClick(30)} className={buttonClass}>
             30
           </button>
-          <button
-            onClick={() => handleButtonClick(50)}
-            className={buttonClass}
-          >
+          <button onClick={() => handleButtonClick(50)} className={buttonClass}>
             50
           </button>
-
           {/* Row 3 - Custom Input */}
           <div></div> {/* Empty space */}
           <input
@@ -91,8 +75,11 @@ const ZeroNRunMenu: React.FC<ZeroNRunMenuAltProps> = ({ onStart, onHome }) => {
         </div>
 
         <div className="w-full flex justify-between px-6 mt-2">
-          <button onClick={onHome} className="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300">
-              Home
+          <button
+            onClick={onHome}
+            className="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300"
+          >
+            Home
           </button>
 
           <button
@@ -101,7 +88,6 @@ const ZeroNRunMenu: React.FC<ZeroNRunMenuAltProps> = ({ onStart, onHome }) => {
           >
             Start Game
           </button>
-
         </div>
       </div>
     </div>

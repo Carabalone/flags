@@ -15,12 +15,15 @@ const shuffleArray = (array: any[]) => {
   return array;
 };
 
-const normalizeString = (str: string) => 
-  str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const normalizeString = (str: string) =>
+  str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
 
 const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
   const [answer, setAnswer] = useState('');
-  const [message, setMessage] = useState<JSX.Element | null>(null); 
+  const [message, setMessage] = useState<JSX.Element | null>(null);
   const [currentFlag, setCurrentFlag] = useState<{
     code: string;
     name: string;
@@ -29,7 +32,10 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [remainingCountries, setRemainingCountries] = useState(() =>
-    shuffleArray(countriesData).slice(0, mode === 'normal' ? n : countriesData.length)
+    shuffleArray(countriesData).slice(
+      0,
+      mode === 'normal' ? n : countriesData.length
+    )
   );
   const [isFinished, setIsFinished] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,8 +46,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
 
   useEffect(() => {
     randomizeCountry();
-  }, [remainingCountries])
-  
+  }, [remainingCountries]);
 
   const randomizeCountry = () => {
     if (remainingCountries.length === 0) {
@@ -67,14 +72,19 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
       setMessage(<p className="text-red-500">Input Something</p>);
       return;
     }
-    if (currentFlag && answer.toLowerCase() === currentFlag.name.toLowerCase()) {
+    if (
+      currentFlag &&
+      answer.toLowerCase() === currentFlag.name.toLowerCase()
+    ) {
       setScore(score + 1);
       setMessage(<p className="text-green-500">Correct!</p>);
     } else {
       setMessage(
         <p className="text-red-500">
           Incorrect! The correct answer was{' '}
-          <span className="font-semibold text-lime-500">{currentFlag?.name}.</span>
+          <span className="font-semibold text-lime-500">
+            {currentFlag?.name}.
+          </span>
         </p>
       );
       if (mode === 'hardcore') {
@@ -105,8 +115,12 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
           normalizeString(country.name).includes(normalizeString(value))
         )
         .sort((a, b) => {
-          const aStartsWith = a.name.toLowerCase().startsWith(value.toLowerCase());
-          const bStartsWith = b.name.toLowerCase().startsWith(value.toLowerCase());
+          const aStartsWith = a.name
+            .toLowerCase()
+            .startsWith(value.toLowerCase());
+          const bStartsWith = b.name
+            .toLowerCase()
+            .startsWith(value.toLowerCase());
 
           if (aStartsWith && !bStartsWith) return -1;
           if (!aStartsWith && bStartsWith) return 1;
@@ -145,10 +159,13 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
 
         // Scroll the suggestions dropdown if needed
         const suggestionList = document.querySelector('ul') as HTMLElement;
-        const activeSuggestion = document.querySelector('.active-suggestion') as HTMLElement;
+        const activeSuggestion = document.querySelector(
+          '.active-suggestion'
+        ) as HTMLElement;
 
         if (suggestionList && activeSuggestion) {
-          suggestionList.scrollTop = activeSuggestion.offsetTop - suggestionList.offsetTop;
+          suggestionList.scrollTop =
+            activeSuggestion.offsetTop - suggestionList.offsetTop;
         }
       }
     },
@@ -179,8 +196,12 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
     <div className="flex flex-col items-center justify-center h-full w-full bg-gray-100 overflow-hidden">
       <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg relative">
         <div className="flex justify-between w-full mb-4 text-black">
-          <span className="text-lg font-bold">Score: {score}/{n}</span>
-          <span className="text-lg font-bold">Remaining: {remainingCountries.length}</span>
+          <span className="text-lg font-bold">
+            Score: {score}/{n}
+          </span>
+          <span className="text-lg font-bold">
+            Remaining: {remainingCountries.length}
+          </span>
         </div>
         {currentFlag && (
           <img
@@ -245,7 +266,8 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
             <p className="mb-4">
               Your final score is{' '}
               <span className="font-bold text-slate-700">
-                {score}{mode === 'normal' ? `/${n}` : ''}
+                {score}
+                {mode === 'normal' ? `/${n}` : ''}
               </span>
               .
             </p>
