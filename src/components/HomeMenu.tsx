@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import countriesData from '../assets/countries_corrected.json';
-import DailyFlag from './DailyFlag';
+import React from 'react';
 import Title from './Title.tsx';
 
 interface HomeMenuProps {

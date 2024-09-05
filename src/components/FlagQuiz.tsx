@@ -144,8 +144,8 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
         }
 
         // Scroll the suggestions dropdown if needed
-        const suggestionList = document.querySelector('ul');
-        const activeSuggestion = document.querySelector('.active-suggestion');
+        const suggestionList = document.querySelector('ul') as HTMLElement;
+        const activeSuggestion = document.querySelector('.active-suggestion') as HTMLElement;
 
         if (suggestionList && activeSuggestion) {
           suggestionList.scrollTop = activeSuggestion.offsetTop - suggestionList.offsetTop;

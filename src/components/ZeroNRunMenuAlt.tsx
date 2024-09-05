@@ -6,7 +6,7 @@ interface ZeroNRunMenuAltProps {
   onHome: () => void;
 }
 
-const ZeroNRunMenu: React.FC<ZeroNRunMenuProps> = ({ onStart, onHome }) => {
+const ZeroNRunMenu: React.FC<ZeroNRunMenuAltProps> = ({ onStart, onHome }) => {
   const [n, setN] = useState(10);
   const [customValue, setCustomValue] = useState('');
 

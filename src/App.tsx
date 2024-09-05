@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import HomeMenu from './components/HomeMenu';
-import ZeroNRunMenu from './components/ZeroNRunMenu';
 import ZeroNRunMenuAlt from './components/ZeroNRunMenuAlt';
 import FlagQuiz from './components/FlagQuiz';
 
