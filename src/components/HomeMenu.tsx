@@ -2,7 +2,7 @@ import React from 'react';
 import Title from './Title.tsx';
 
 interface HomeMenuProps {
-  onSelectMode: (mode: '0-n' | 'full' | 'hardcore') => void;
+  onSelectMode: (mode: '0-n' | 'full' | 'hardcore' | 'multiple-choice') => void;
 }
 
 let buttonClass =
@@ -36,6 +36,12 @@ const HomeMenu: React.FC<HomeMenuProps> = ({ onSelectMode }) => {
           className={'bg-red-500 hover:bg-red-600 ' + buttonClass}
         >
           Hardcore Mode
+        </button>
+        <button
+          onClick={() => onSelectMode('multiple-choice')}
+          className={'bg-purple-500 hover:bg-purple-600 ' + buttonClass}
+        >
+          Multiple Choice Mode
         </button>
       </div>
     </div>

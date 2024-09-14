@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import HomeMenu from './components/HomeMenu';
 import ZeroNRunMenuAlt from './components/ZeroNRunMenuAlt';
 import FlagQuiz from './components/FlagQuiz';
+import MultipleChoiceQuiz from './components/MultipleChoiceQuiz.tsx'
 
 const App: React.FC = () => {
-  const [gameMode, setGameMode] = useState<'home' | '0-n-menu' | 'quiz'>(
+  const [gameMode, setGameMode] = useState<'home' | '0-n-menu' | 'quiz' | 'multiple-choice'>(
     'home'
   );
   const [n, setN] = useState(10);
   const [quizMode, setQuizMode] = useState<'normal' | 'hardcore'>('normal');
 
-  const handleSelectMode = (mode: '0-n' | 'full' | 'hardcore') => {
+  const handleSelectMode = (mode: '0-n' | 'full' | 'hardcore' | 'multiple-choice') => {
     if (mode === '0-n') {
       setGameMode('0-n-menu');
     } else if (mode === 'full') {
@@ -21,6 +22,8 @@ const App: React.FC = () => {
       setN(254);
       setQuizMode('hardcore');
       setGameMode('quiz');
+    } else if (mode === 'multiple-choice') {
+      setGameMode('multiple-choice');
     }
   };
 
@@ -46,6 +49,7 @@ const App: React.FC = () => {
       {gameMode === 'quiz' && (
         <FlagQuiz n={n} onFinish={finishGame} mode={quizMode} />
       )}
+      {gameMode === 'multiple-choice' && <MultipleChoiceQuiz onFinish={finishGame} />}
     </div>
   );
 };
