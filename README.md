@@ -14,4 +14,12 @@ I have several plans to this game, such as to:
 - Category specific (only europe, only america, only europe & america, etc.).
 
 ### TODO
-- back button
+- +50 instead of set 50, then show amount.
+- Make 'You Win' screen.
+- separate countries by continent and let select by continents.
+- Enable/Disable sorveign states.
+- Dark Mode.
+- Multiple choice mode.
+- Make only the autocomplete tab-able in flagQuiz.
+- Make try again and back to menu be tab-able before other buttons on 'you wi'n/'game over' popup.
+- Make the 'submit' button more attention grabbing than the 'finish early' button

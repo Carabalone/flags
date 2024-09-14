@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import countriesData from '../assets/countries_corrected.json';
+import {showFlag, shuffleArray} from './utils/utils.tsx'
 
 interface FlagQuizProps {
   n: number;
   mode: 'normal' | 'hardcore';
   onFinish: (score: number) => void;
 }
-
-const shuffleArray = (array: any[]) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
 
 const normalizeString = (str: string) =>
   str
@@ -56,7 +49,6 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
 
     const nextCountry = remainingCountries[0];
     setCurrentFlag(nextCountry);
-    // setRemainingCountries(remainingCountries.slice(1)); // Remove the used country
     setMessage(null);
     setAnswer('');
     setSuggestions([]);
@@ -203,16 +195,7 @@ const FlagQuiz: React.FC<FlagQuizProps> = ({ n, mode, onFinish }) => {
             Remaining: {remainingCountries.length}
           </span>
         </div>
-        {currentFlag && (
-          <img
-            src={`https://flagcdn.com/h80/${currentFlag.code.toLowerCase()}.png`}
-            srcSet={`https://flagcdn.com/h160/${currentFlag.code.toLowerCase()}.png 2x,
-              https://flagcdn.com/h240/${currentFlag.code.toLowerCase()}.png 3x`}
-            height="80"
-            alt={currentFlag.name}
-            className="mb-6 shadow-lg"
-          />
-        )}
+        {currentFlag && showFlag(currentFlag)}
         <form onSubmit={handleSubmit} className="w-full relative">
           <input
             type="text"
